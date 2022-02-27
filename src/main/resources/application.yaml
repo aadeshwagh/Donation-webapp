@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    driver-class-name: ${DRIVER_CLASS_NAME}
+  jpa:
+    hibernate.ddl-auto: update
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
