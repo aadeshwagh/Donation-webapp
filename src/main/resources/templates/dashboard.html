@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div th:insert="component/navbar :: nav-bar" style="margin-bottom: 10px;"></div>
+    <div  th:unless = "${events}" >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Event Name</th>
+                <th scope="col">Organization Name</th>
+                <th scope="col">Donation Mode</th>
+            </tr>
+            </thead>
+                <tbody>
+                <div th:each="donation : ${donations}" >
+                    <tr>
+                        <th scope="row" >*</th>
+                        <td ><a th:text="${donation.eventName}" th:href="@{'/getEventById/'+${donation.eventId}}"></a></td>
+                        <td th:text="${donation.ngo}">Otto</td>
+                        <td th:text="${donation.donationMode}">@mdo</td>
+                    </tr>
+                </div>
+
+                </tbody>
+            </table>
+    </div>
+    <div th:if="${events}" >
+        <div >
+            <a class="btn btn-primary" th:href="@{/getEventRegistration}"> Add Event</a>
+        </div>
+        <div class="col-xs-6">
+            <h2 class="sub-header">All Donations</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">Organization Name</th>
+                        <th scope="col">Donation Mode</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:each="donation : ${donations}" >
+                        <tr>
+                            <th scope="row" >*</th>
+                            <td ><a th:text="${donation.eventName}" th:href="@{'/getEventById/'+${donation.eventId}}"></a></td>
+                            <td th:text="${donation.ngo}">Otto</td>
+                            <td th:text="${donation.donationMode}">@mdo</td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <h2 class="sub-header">All Events Organised</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">City</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:each="event : ${events}" >
+                        <tr>
+                            <th scope="row" >*</th>
+                            <td ><a th:text="${event.eventName}" th:href="@{'/getEventById/'+${event.eventId}}"></a></td>
+                            <td ><a th:text="${event.date}"></a></td>
+                            <td ><a th:text="${event.city}"></a></td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
