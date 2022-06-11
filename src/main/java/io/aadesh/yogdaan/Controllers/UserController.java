@@ -22,6 +22,8 @@ public class UserController {
 
     @Autowired
     private Utility util;
+    @Autowired
+    private EventController eventController;
 
     @Autowired
     private UserService userService;
@@ -36,7 +38,10 @@ public class UserController {
     }
 
     @GetMapping("/getPreRegistration")
-    public String getPreRegistration() {
+    public String getPreRegistration(Model model) {
+        if(userService.getAppUser(util.getUserId())!=null){
+            return eventController.getDashboard(model);
+        }
         return "pre-registration";
     }
 
