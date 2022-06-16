@@ -45,7 +45,7 @@ public class EventController {
         }
         List<EventDonations> userDonations = donationService.getEventsByUser(user.getUserId());
         List<Event> userOrganized = eventService.getAllEventsByUserId(user.getUserId());
-        if(!userOrganized.isEmpty()){
+        if(user.getNgoType() != null){
             model.addAttribute("events",userOrganized);
         }
 

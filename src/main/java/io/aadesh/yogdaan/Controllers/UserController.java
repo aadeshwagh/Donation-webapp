@@ -1,6 +1,7 @@
 package io.aadesh.yogdaan.Controllers;
 
 import io.aadesh.yogdaan.entity.AppUser;
+import io.aadesh.yogdaan.service.EventService;
 import io.aadesh.yogdaan.service.UserService;
 import io.aadesh.yogdaan.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -24,6 +26,8 @@ public class UserController {
     private Utility util;
     @Autowired
     private EventController eventController;
+    @Autowired
+    private EventService eventService;
 
     @Autowired
     private UserService userService;
@@ -76,5 +80,28 @@ public class UserController {
         return "home";
     }
 
+    @GetMapping("/getAllNgos")
+    public String getAllNgos(Model model){
+        if(userService.getAppUser(util.getUserId())==null){
+            return "pre-registration";
+        }
+       // System.out.println(userService.geAllNgos().get(0).getName());
+        model.addAttribute("ngos",userService.geAllNgos());
 
+        return "ngos";
+    }
+
+    @GetMapping("/getNgoById/{id}")
+    public String getNgoById(@PathVariable String id , Model model){
+        if(userService.getAppUser(util.getUserId())==null){
+            return "pre-registration";
+        }
+
+        model.addAttribute("ngo",userService.getAppUser(id));
+        model.addAttribute("events",eventService.getAllEventsByUserId(id));
+
+        return "ngo";
+
+
+    }
 }

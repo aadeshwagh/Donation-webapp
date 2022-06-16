@@ -5,7 +5,9 @@ import io.aadesh.yogdaan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -25,6 +27,11 @@ public class UserService {
         userRepository.save(user);
     }
 
+
+    public List<AppUser> geAllNgos() {
+        return userRepository.findAll().stream().filter(user ->user.getNgoType()!=null).collect(Collectors.toList());
+
+    }
 
 
 }

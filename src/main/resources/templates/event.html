@@ -14,13 +14,13 @@
     <div class="card">
         <div class="row g-0">
             <div class="col-md-4">
-                <img th:src ="${event.category}" class="img-fluid rounded-start" alt="..." />
+                <img th:src ="@{'/images/'+${event.category}+'.jpeg'}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class = "col-md-8">
                 <div class="card-body">
                     <h5 class="card-title display-2" th:text = "${event.eventName}">Card title</h5>
                         <h6>Event Organizer :</h6>
-                        <a class="card-title display-7" th:href="@{'/getOrganizationById/'+${organization.userId}}" th:text = "${organization.name}">Card title</a>
+                        <a class="card-title display-7" th:href="@{'/getNgoById/'+${organization.userId}}" th:text = "${organization.name}">Card title</a>
                         <h6>Event Category :</h6>
                         <h8 class="card-title display-8" th:text = "${event.category}">Card title</h8>
                         <h6>Event State :</h6>
