@@ -42,6 +42,9 @@
                                 <li><a  th:href="@{'/donate/'+${event.eventId}+'/materials'}" class="dropdown-item">Materials</a></li>
                             </ul>
                         </div>
+                        <div>
+                            <a th:href="@{/chat}" class="btn btn-primary">Open Chat</a>
+                        </div>
 
                         <p th:if= "${registered}"> You have already donated for this event.</p>
                 </div>
